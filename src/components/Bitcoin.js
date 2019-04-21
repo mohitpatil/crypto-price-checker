@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Segment, Icon, Card } from "semantic-ui-react";
-
+import CurrencyFormater from "../components/CurrencyFormater";
+import Chart from "./BitCoinChart";
 class Bitcoin extends Component {
   constructor() {
     super();
@@ -48,9 +49,9 @@ class Bitcoin extends Component {
 
     const currentPrice = prices[prices.length - 1].price;
     const currentDisplayTime = prices[prices.length - 1].time;
-    const tenDaysBefore = prices[prices.length - 10].price;
-    const diffInLast10Days = currentPrice - tenDaysBefore;
-    console.log(prices);
+    const ThirtyDaysBefore = prices[0].price;
+    const diffInLast30Days = currentPrice - ThirtyDaysBefore;
+    const symbol = diffInLast30Days > 0;
 
     if (error) {
       return (
@@ -72,40 +73,41 @@ class Bitcoin extends Component {
       return (
         <div className="ui container">
           <Segment>
-            <h1>Bitcoin</h1>
+            <h1 className="bit-header">Bitcoin</h1>
             <Card.Group centered>
-              <Card >
+              <Card>
                 <Card.Content>
                   <Card.Header>Bitcoin Price</Card.Header>
                   {/* <Card.Meta>Co-Worker</Card.Meta> */}
                   <Card.Description>
-                  ${currentPrice}
+                    {CurrencyFormater(currentPrice)}
                   </Card.Description>
                 </Card.Content>
               </Card>
 
-              <Card >
+              <Card>
                 <Card.Content>
                   <Card.Header>Last Updated:</Card.Header>
                   {/* <Card.Meta>Co-Worker</Card.Meta> */}
-                  <Card.Description>
-                  {currentDisplayTime}
-                  </Card.Description>
+                  <Card.Description>{currentDisplayTime}</Card.Description>
                 </Card.Content>
               </Card>
 
-
-              <Card >
+              <Card>
                 <Card.Content>
-                  <Card.Header>10 Days diffrence:</Card.Header>
+                  <Card.Header>30 Days diffrence:</Card.Header>
                   {/* <Card.Meta>Co-Worker</Card.Meta> */}
-                  <Card.Description>
-                  ${diffInLast10Days}
+                  <Card.Description className={symbol ? "plus" : "minus"}>
+                    {symbol ? "+" : ""}
+                    {CurrencyFormater(diffInLast30Days)}
                   </Card.Description>
                 </Card.Content>
               </Card>
             </Card.Group>
-            
+
+            <Segment>
+              <Chart/>
+            </Segment>
           </Segment>
         </div>
       );

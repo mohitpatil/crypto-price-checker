@@ -16,14 +16,15 @@
   clear: both;
 }
 
-.spacer {
-  display: flex;
-  flex: 1;
+.bit-header {
+text-align: center;
+font-size: 30px;
 }
-.alignleft {
-  float: left;
- }
 
-.alignRight {
- float: right;
+.plus {
+  color: green !important;
+}
+
+.minus {
+  color: red !important;
 }

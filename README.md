@@ -1,3 +1,6 @@
+## Simple Dashboard view of Bitcoin CryptoCurrency, for last 30 Days. 
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
